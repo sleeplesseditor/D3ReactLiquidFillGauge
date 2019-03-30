@@ -13,6 +13,8 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <script src="./liquidFillGauge.js" language="JavaScript"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -22,11 +24,12 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>React D3 LiquidFillGauge Experiment</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <svg id="fillgauge5" width="97%" height="300" onclick="gauge5.update(NewValue());"></svg>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -37,5 +40,31 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script language="JavaScript">
+      var config = liquidFillGaugeDefaultSettings();
+      config.circleThickness = 0.15;
+      config.circleColor = "#6DA398";
+      config.textColor = "#0E5144";
+      config.waveTextColor = "#6DA398";
+      config.waveColor = "#246D5F";
+      config.textVertPosition = 0.8;
+      config.waveAnimateTime = 1000;
+      config.waveHeight = 0.05;
+      config.waveAnimate = true;
+      config.waveRise = false;
+      config.waveHeightScaling = false;
+      config.waveOffset = 0.25;
+      config.textSize = 0.75;
+      config.waveCount = 3;
+      var gauge5 = loadLiquidFillGauge("fillgauge5", 60.44, config);
+  
+      function NewValue(){
+          if(Math.random() > .5){
+              return Math.round(Math.random()*100);
+          } else {
+              return (Math.random()*100).toFixed(1);
+          }
+      }
+  </script>
   </body>
 </html>
